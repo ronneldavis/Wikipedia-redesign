@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Wikipedia redesign",
+  "description": "A wikipedia redesign",
+  "version": "1.0",
+
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_scripts": [
+     {
+        "matches":    ["https://en.wikipedia.org/*"],
+        "css":        ["new-styles.css"],
+        "js":         ["jquery.js", "new-script.js"]
+     }
+  ]
+}

@@ -1,5 +1,7 @@
-$(document).ready(function(){
+var sidebarOpened = false;
 
+$(document).ready(function(){
+    
 	var menuIcon = document.createElement("img");
 	menuIcon.setAttribute("src", "https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-12-128.png");
 	$("body").append(menuIcon);
@@ -14,26 +16,38 @@ $(document).ready(function(){
 	});
 	
 	$(menuIcon).click(function() {
-		$("#mw-navigation").fadeIn();
+        if(!sidebarOpened)
+            $("#mw-navigation").fadeIn();
+        else
+            $("#mw-navigation").fadeOut();
+        
+        sidebarOpened = !sidebarOpened;
 	});
 	
 	var logo = document.createElement("img");
 	logo.setAttribute("src", "http://ecx.images-amazon.com/images/I/61sftn-3vML.png");
 	$("body").append(logo);
-	
+	$(logo).attr("id", "logo");
+    
 	$(logo).css({
 		width: 150,
 		height: 150,
-		top: 50,
-		left: 50,
+		top: 0,
+		left: 10,
 		position: "fixed",
+        background: "#f6f6f6",
+        border: "40px solid #f6f6f6"
 	});
 	
 	
 	$("#searchform").prependTo(document.body);
 	$("#toc").prependTo(document.body);
-	$(".infobox").prependTo(document.body);
+	//$(".infobox").prependTo(document.body);
 
+    $('#toc').live('click', function(e) {
+        alert("works");
+    });
+    
 	
 	$("#toc .toclevel-1").each(function(){
 		
@@ -51,17 +65,6 @@ $(document).ready(function(){
 		
 		if($(this).find("ul").length != 0)
 			$(downArrow).prependTo(this);
-	});
-	
-	$(".downArrow").click(function(){
-		if( $(this).parent().data("opened") == "yes"){
-			$(this).parent().css("height", "20px");
-			$(this).parent().data("opened", "no");
-		}
-		else{
-			$(this).parent().css("height", "auto");
-			$(this).parent().data("opened", "yes");
-		}
 	});
 	
 });
